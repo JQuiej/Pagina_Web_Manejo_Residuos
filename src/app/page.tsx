@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 export default function WelcomePage() {
   return (
     <>
@@ -13,12 +11,17 @@ export default function WelcomePage() {
             <span className="logo-text">Recicla UMG</span>
           </div>
           <nav className="nav-right">
-            <Link href="/" className="nav-link">
+            <a href="/" className="nav-link">
               Inicio
-            </Link>
-            <Link href="/clasificador" className="nav-link">
+            </a>
+            <a href="/departamentos" className="nav-link">
+              Estadisticas
+            </a>
+            <a href="/mapa" className="nav-link">Mapa de Residuos</a>
+            <a href="/clasificador" className="nav-link">
               Clasificador
-            </Link>
+            </a>
+            
           </nav>
         </div>
       </header>
@@ -36,9 +39,9 @@ export default function WelcomePage() {
           <p>
             Conoce las normativas y procesos que te ayudarán a gestionar de manera responsable tus residuos.
           </p>
-          <Link href="/clasificador" className="hero-button">
+          <a href="/clasificador" className="hero-button">
             Ir al Clasificador
-          </Link>
+          </a>
         </div>
       </section>
 
@@ -186,10 +189,12 @@ export default function WelcomePage() {
           margin: 0;
           padding: 0;
           font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          background-color: #fff; /* Fondo blanco */
+          color: #000; /* Texto negro por defecto */
         }
         /* Barra de Navegación Minimalista */
         .top-nav {
-          background: rgba(255, 255, 255, 0.95);
+          background: #fff; /* Fondo blanco */
           padding: 0.5rem 2rem;
           position: sticky;
           top: 0;
@@ -213,33 +218,38 @@ export default function WelcomePage() {
         .logo-text {
           font-size: 1rem;
           font-weight: bold;
-          color: #333;
+          color: #000; /* Texto negro */
         }
         .nav-right {
           display: flex;
-          gap: 2rem;
+          gap: 1rem; /* Espacio entre los botones del nav */
         }
+        /* Enlaces como botones outline en negro */
         .nav-link {
+          display: inline-block;
+          padding: 0.5rem 1.2rem;
+          background-color: transparent;
+          color: #000;
+          border: 1px solid #000;
+          border-radius: 6px;
           text-decoration: none;
-          color: #333;
           font-size: 1rem;
           font-weight: 500;
-          transition: color 0.2s ease;
+          transition: background-color 0.2s ease, color 0.2s ease;
+          cursor: pointer;
         }
         .nav-link:hover,
-        .nav-link:focus,
-        .nav-link:visited,
-        .nav-link:active {
-          text-decoration: none;
-          color: #0070f3;
+        .nav-link:focus {
+          background-color: #000;
+          color: #fff; /* Al invertirlo, texto blanco para contraste */
         }
+
         /* Sección Hero */
         .hero {
           position: relative;
           height: 70vh;
           overflow: hidden;
           text-align: center;
-          color: #fff;
         }
         .hero-img {
           position: absolute;
@@ -273,34 +283,37 @@ export default function WelcomePage() {
         .hero-content h1,
         .hero-content h2,
         .hero-content h3 {
-          color: #fff;
           margin: 0.5rem 0;
+          color: #fff; /* Texto sobre la imagen oscurecida */
         }
         .hero-content p {
           font-size: 1.2rem;
           margin-bottom: 1rem;
           line-height: 1.5;
-          text-align: center;
+          color: #fff;
         }
+        /* Botón principal outline en negro */
         .hero-button {
           display: inline-block;
           padding: 1rem 2rem;
-          background-color: #0070f3;
-          color: #fff;
-          border: none;
-          border-radius: 5px;
+          border: 1px solid #000;
+          background-color: #fff; /* O transparente, si quieres */
+          color: #000;
+          border-radius: 6px;
           text-decoration: none;
           font-size: 1.2rem;
-          transition: background 0.3s ease;
+          transition: background-color 0.3s ease, color 0.3s ease;
           cursor: pointer;
         }
         .hero-button:hover {
-          background-color: #005bb5;
+          background-color: #000;
+          color: #fff;
         }
+
         /* Main Content */
         .main-content {
           padding: 2rem;
-          background: #f9f9f9;
+          background: #fff; /* Fondo blanco */
         }
         .info-section {
           text-align: center;
@@ -325,11 +338,11 @@ export default function WelcomePage() {
           max-width: 800px;
           text-align: left;
           padding-left: 1.5rem;
+          color: #333;
         }
         .info-section li {
           margin-bottom: 0.5rem;
           font-size: 1.1rem;
-          color: #555;
         }
         /* Secciones con contenido dividido */
         .section-content {
@@ -343,6 +356,7 @@ export default function WelcomePage() {
         .section-text {
           flex: 1;
           min-width: 250px;
+          color: #333;
         }
         .section-image {
           flex: 1;
@@ -351,13 +365,12 @@ export default function WelcomePage() {
         }
         .image-wrapper {
           width: 100%;
-          height: 300px; /* Altura fija para mantener consistencia */
+          height: 300px;
           display: flex;
           align-items: center;
           justify-content: center;
           border-radius: 8px;
           overflow: hidden;
-          /* Sin fondo para que no aparezca color distinto */
           background: transparent;
         }
         .image-wrapper img {
@@ -368,6 +381,7 @@ export default function WelcomePage() {
         .reverse {
           flex-direction: row-reverse;
         }
+
         /* Galería */
         .gallery-section {
           display: flex;
@@ -377,7 +391,7 @@ export default function WelcomePage() {
           margin-top: 2rem;
         }
         .gallery-item {
-          background: #fff;
+          background: #f5f5f5;
           border-radius: 8px;
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
           flex: 1 1 300px;
@@ -386,7 +400,7 @@ export default function WelcomePage() {
           padding: 1rem;
         }
         .gallery-item .image-wrapper {
-          height: 200px; /* Altura fija para imágenes de la galería */
+          height: 200px;
           margin-bottom: 1rem;
           background: transparent;
         }
@@ -400,6 +414,7 @@ export default function WelcomePage() {
           color: #666;
           line-height: 1.4;
         }
+
         /* Footer */
         .footer {
           text-align: center;
@@ -412,6 +427,7 @@ export default function WelcomePage() {
           font-size: 1rem;
           color: #333;
         }
+
         /* Responsividad */
         @media (max-width: 768px) {
           .nav-container {
@@ -430,11 +446,11 @@ export default function WelcomePage() {
             padding: 1rem;
           }
           .hero-content h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
           }
           .hero-content h2,
           .hero-content h3 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
           }
           .hero-content p {
             font-size: 1rem;

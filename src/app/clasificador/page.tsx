@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import "@tensorflow/tfjs";
-import Link from "next/link";
 
 export default function ClassifierPage() {
   const [model, setModel] = useState<mobilenet.MobileNet | null>(null);
@@ -28,21 +27,21 @@ export default function ClassifierPage() {
    * Ajusta o expande según necesites.
    */
   const translations: { [key: string]: string } = {
-    "banana": "Banana",
+    banana: "Banana",
     "banana peel": "Cáscara de banana",
-    "apple": "Manzana",
-    "orange": "Naranja",
-    "egg": "Huevo",
+    apple: "Manzana",
+    orange: "Naranja",
+    egg: "Huevo",
     "egg shell": "Cáscara de huevo",
     "coffee grounds": "Residuos de café",
     "chicken bones": "Huesos de pollo",
-    "tomato": "Tomate",
-    "leaf": "Hoja",
-    "plant": "Planta",
+    tomato: "Tomate",
+    leaf: "Hoja",
+    plant: "Planta",
     "plant leaf": "Hoja de planta",
-    "fruit": "Fruta",
-    "vegetable": "Vegetal",
-    "food": "Comida",
+    fruit: "Fruta",
+    vegetable: "Vegetal",
+    food: "Comida",
 
     "water bottle": "Botella de agua",
     "milk bottle": "Botella de leche",
@@ -66,13 +65,13 @@ export default function ClassifierPage() {
     "plastic food wrapper": "Envoltura de comida de plástico",
     "plastic food tray": "Bandeja de comida de plástico",
     "plastic food box": "Caja de comida de plástico",
-    "bottle": "Botella",
+    bottle: "Botella",
     "plastic bottle": "Botella de plástico",
     "food container": "Contenedor de comida",
     "food packaging": "Empaque de comida",
-    "carton": "Cartón",
-    "cardboard": "Cartón",
-    "paper": "Papel",
+    carton: "Cartón",
+    cardboard: "Cartón",
+    paper: "Papel",
 
     "cardboard box": "Caja de cartón",
     "cardboard container": "Contenedor de cartón",
@@ -89,14 +88,13 @@ export default function ClassifierPage() {
     "paper towel": "Toalla de papel",
     "paper napkin": "Servilleta de papel",
 
-    "can": "Lata",
+    can: "Lata",
     "tin can": "Lata de metal",
     "metal can": "Lata de metal",
     "aluminum can": "Lata de aluminio",
-    "metal": "Metal",
-    "glass": "Vidrio",
-    "packaging": "Empaque",
-
+    metal: "Metal",
+    glass: "Vidrio",
+    packaging: "Empaque",
     // Si la etiqueta no se encuentra aquí, se usará la original del modelo
   };
 
@@ -185,12 +183,19 @@ export default function ClassifierPage() {
             <span className="logo-text">Recicla UMG</span>
           </div>
           <nav className="nav-right">
-            <Link href="/" className="nav-link">
+            {/* Enlaces con <a> en lugar de Link */}
+            <a href="/" className="nav-link">
               Inicio
-            </Link>
-            <Link href="/clasificador" className="nav-link">
-              Clasificador
-            </Link>
+            </a>
+            <a href="/departamentos" className="nav-link">
+              Estadisticas
+            </a>
+            <a href="/mapa" className="nav-link">
+            Mapa de Residuos
+            </a>
+            <a href="/clasificador" className="nav-link">
+              Clasificador 
+            </a>
           </nav>
         </div>
       </header>
@@ -276,19 +281,20 @@ export default function ClassifierPage() {
           display: flex;
           gap: 2rem;
         }
+        /* .nav-link similar a un botón outline, si lo deseas: */
         .nav-link {
-          text-decoration: none;
+          display: inline-block;
+          padding: 0.5rem 1.2rem;
           color: #333;
-          font-size: 1rem;
-          font-weight: 500;
-          transition: color 0.2s ease;
+          text-decoration: none;
+          border: 1px solid #333;
+          border-radius: 4px;
+          transition: background-color 0.2s ease, color 0.2s ease;
         }
         .nav-link:hover,
-        .nav-link:focus,
-        .nav-link:visited,
-        .nav-link:active {
-          text-decoration: none;
-          color: #0070f3;
+        .nav-link:focus {
+          background-color: #333;
+          color: #fff;
         }
 
         /* Main Content del Clasificador */
