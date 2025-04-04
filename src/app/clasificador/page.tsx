@@ -23,58 +23,84 @@ export default function ClassifierPage() {
     loadModel();
   }, []);
 
-  const translateLabelToSpanish = (label: string): string => {
-    const translations: { [key: string]: string } = {
-      banana: "Banana",
-      "water bottle": "botella de agua",
-      "plastic bag": "bolsa de plástico",
-      "plastic container": "contenedor de plástico",
-      "plastic cup": "taza de plástico",
-      "plastic fork": "tenedor de plástico",
-      "plastic spoon": "cuchara de plástico",
-      "plastic knife": "cuchillo de plástico",
-      "plastic straw": "popote de plástico",
-      "plastic wrap": "envoltura de plástico",
-      "plastic lid": "tapa de plástico",
-      "plastic food container": "contenedor de comida de plástico",
-      "plastic food bag": "bolsa de comida de plástico",
-      "plastic food wrapper": "envoltura de comida de plástico",
-      "plastic food tray": "bandeja de comida de plástico",
-      "plastic food box": "caja de comida de plástico",
-      apple: "Manzana",
-      orange: "Naranja",
-      "plastic bottle": "Botella de plástico",
-      bottle: "Botella",
-      paper: "Papel",
-      "cardboard box": "Caja de cartón",
-      "cardboard container": "Contenedor de cartón",
-      "cardboard tube": "Tubo de cartón",
-      "cardboard box with lid": "Caja de cartón con tapa",
-      "cardboard box with handle": "Caja de cartón con asa",
-      "cardboard box with window": "Caja de cartón con ventana",
-      can: "Lata",
-      "tin can": "Lata de metal",
-      "metal can": "Lata de metal",
-      "aluminum can": "Lata de aluminio",
-      metal: "Metal",
-      cardboard: "Cartón",
-      "paper bag": "Bolsa de papel",
-      "paper container": "Contenedor de papel",
-      "paper cup": "Taza de papel",
-      "paper plate": "Plato de papel",
-      "paper towel": "Toalla de papel",
-      "paper napkin": "Servilleta de papel",
-      glass: "Vidrio",
-      packaging: "Empaque",
-      fruit: "Fruta",
-      leaf: "Hoja",
-      plant: "Planta",
-      "plant leaf": "Hoja de planta",
-      vegetable: "Vegetal",
-      food: "Comida",
-      tomato: "Tomate",
-    };
+  /**
+   * Diccionario de traducciones al español para artículos cotidianos.
+   * Ajusta o expande según necesites.
+   */
+  const translations: { [key: string]: string } = {
+    "banana": "Banana",
+    "banana peel": "Cáscara de banana",
+    "apple": "Manzana",
+    "orange": "Naranja",
+    "egg": "Huevo",
+    "egg shell": "Cáscara de huevo",
+    "coffee grounds": "Residuos de café",
+    "chicken bones": "Huesos de pollo",
+    "tomato": "Tomate",
+    "leaf": "Hoja",
+    "plant": "Planta",
+    "plant leaf": "Hoja de planta",
+    "fruit": "Fruta",
+    "vegetable": "Vegetal",
+    "food": "Comida",
 
+    "water bottle": "Botella de agua",
+    "milk bottle": "Botella de leche",
+    "milk carton": "Cartón de leche",
+    "milk jug": "Jarra de leche (plástico)",
+    "juice box": "Caja de jugo",
+    "juice bottle": "Botella de jugo",
+
+    "plastic bag": "Bolsa de plástico",
+    "plastic container": "Contenedor de plástico",
+    "plastic cup": "Vaso de plástico",
+    "plastic plate": "Plato de plástico",
+    "plastic fork": "Tenedor de plástico",
+    "plastic spoon": "Cuchara de plástico",
+    "plastic knife": "Cuchillo de plástico",
+    "plastic straw": "Popote de plástico",
+    "plastic wrap": "Envoltura de plástico",
+    "plastic lid": "Tapa de plástico",
+    "plastic food container": "Contenedor de comida de plástico",
+    "plastic food bag": "Bolsa de comida de plástico",
+    "plastic food wrapper": "Envoltura de comida de plástico",
+    "plastic food tray": "Bandeja de comida de plástico",
+    "plastic food box": "Caja de comida de plástico",
+    "bottle": "Botella",
+    "plastic bottle": "Botella de plástico",
+    "food container": "Contenedor de comida",
+    "food packaging": "Empaque de comida",
+    "carton": "Cartón",
+    "cardboard": "Cartón",
+    "paper": "Papel",
+
+    "cardboard box": "Caja de cartón",
+    "cardboard container": "Contenedor de cartón",
+    "cardboard tube": "Tubo de cartón",
+    "cardboard box with lid": "Caja de cartón con tapa",
+    "cardboard box with handle": "Caja de cartón con asa",
+    "cardboard box with window": "Caja de cartón con ventana",
+    "pizza box": "Caja de pizza",
+
+    "paper bag": "Bolsa de papel",
+    "paper container": "Contenedor de papel",
+    "paper cup": "Vaso de papel",
+    "paper plate": "Plato de papel",
+    "paper towel": "Toalla de papel",
+    "paper napkin": "Servilleta de papel",
+
+    "can": "Lata",
+    "tin can": "Lata de metal",
+    "metal can": "Lata de metal",
+    "aluminum can": "Lata de aluminio",
+    "metal": "Metal",
+    "glass": "Vidrio",
+    "packaging": "Empaque",
+
+    // Si la etiqueta no se encuentra aquí, se usará la original del modelo
+  };
+
+  const translateLabelToSpanish = (label: string): string => {
     const lowerLabel = label.toLowerCase();
     return translations[lowerLabel] || label;
   };
@@ -91,6 +117,10 @@ export default function ClassifierPage() {
       "hoja",
       "comida",
       "tomate",
+      "egg",
+      "egg shell",
+      "coffee grounds",
+      "chicken bones",
     ];
     const recyclableKeywords = [
       "plástico",
@@ -101,6 +131,11 @@ export default function ClassifierPage() {
       "cartón",
       "vidrio",
       "empaque",
+      "milk bottle",
+      "milk carton",
+      "milk jug",
+      "juice box",
+      "juice bottle",
     ];
 
     if (organicKeywords.some((keyword) => lowerLabel.includes(keyword))) {
@@ -167,11 +202,10 @@ export default function ClassifierPage() {
           proceso
         </h2>
         <div className="upload-container">
-          {/* Permite subir una imagen o abrir la cámara en dispositivos móviles */}
+          {/* Permite subir una imagen tanto desde la cámara como desde archivos (sin capture) */}
           <input
             type="file"
             accept="image/*"
-            capture="environment"
             onChange={handleImageChange}
             className="file-input"
           />
