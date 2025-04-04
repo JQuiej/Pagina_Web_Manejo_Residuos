@@ -41,7 +41,9 @@ export default function DepartamentosMapaPage() {
       <header className="top-nav">
         <div className="nav-container">
           <div className="nav-left">
-            <img src="/images/logo.png" alt="Logo Recicla UMG" className="logo" />
+            <a href="/">
+              <img src="/images/logo.png" alt="Logo Recicla UMG" className="logo" />
+            </a>
             <span className="logo-text">Recicla UMG</span>
           </div>
           <nav className="nav-right">
@@ -135,7 +137,7 @@ export default function DepartamentosMapaPage() {
           position: sticky;
           top: 0;
           z-index: 100;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         .nav-container {
           display: flex;
@@ -171,6 +173,24 @@ export default function DepartamentosMapaPage() {
         .nav-link:hover {
           background-color: #333;
           color: #fff;
+        }
+        /* Contenido Principal */
+        .content {
+          max-width: 900px;
+          margin: 2rem auto;
+          padding: 1rem;
+          background: #f9f9f9;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          text-align: center;
+        }
+        h1 {
+          margin-bottom: 1rem;
+          color: #2c3e50;
+        }
+        p {
+          margin-bottom: 1.5rem;
+          color: #555;
         }
         /* Mapa */
         .map-section {
@@ -218,7 +238,8 @@ export default function DepartamentosMapaPage() {
           border-collapse: collapse;
           margin: 0 auto;
         }
-        th, td {
+        th,
+        td {
           padding: 0.75rem;
           border: 1px solid #ddd;
           text-align: left;
