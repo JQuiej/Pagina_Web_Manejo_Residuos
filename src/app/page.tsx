@@ -1,103 +1,465 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+
+export default function WelcomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      {/* Barra de navegación minimalista con logo a la izquierda */}
+      <header className="top-nav">
+        <div className="nav-container">
+          <div className="nav-left">
+            <img src="/images/logo.png" alt="Logo Recicla UMG" className="logo" />
+            <span className="logo-text">Recicla UMG</span>
+          </div>
+          <nav className="nav-right">
+            <Link href="/" className="nav-link">
+              Inicio
+            </Link>
+            <Link href="/clasificador" className="nav-link">
+              Clasificador
+            </Link>
+          </nav>
         </div>
+      </header>
+
+      {/* Sección Hero */}
+      <section className="hero">
+        <img src="/images/hero.png" alt="Imagen Hero" className="hero-img" />
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <h2>Concientización sobre Residuos Sólidos</h2>
+          <p>
+            La correcta separación y clasificación de residuos es fundamental para cuidar nuestro entorno en Guatemala.
+          </p>
+          <h1>¡Actúa Hoy!</h1>
+          <p>
+            Conoce las normativas y procesos que te ayudarán a gestionar de manera responsable tus residuos.
+          </p>
+          <Link href="/clasificador" className="hero-button">
+            Ir al Clasificador
+          </Link>
+        </div>
+      </section>
+
+      {/* Contenido Principal */}
+      <main className="main-content">
+        <section className="info-section">
+          <h2>¿Por qué separar los residuos?</h2>
+          <p>
+            Separar los residuos protege la salud, reduce la contaminación y fomenta el reciclaje, ayudando a preservar nuestro medio ambiente para las futuras generaciones.
+          </p>
+        </section>
+
+        {/* Instrucciones para el Procesamiento de Desechos Orgánicos */}
+        <section className="info-section">
+          <h2>Tratamiento de Desechos Orgánicos</h2>
+          <div className="section-content">
+            <div className="section-text">
+              <p>
+                Los desechos orgánicos, como restos de alimentos y material vegetal, pueden convertirse en abono a través del compostaje. Sigue estos pasos:
+              </p>
+              <ul>
+                <li><strong>Recolección separada:</strong> Utiliza contenedores exclusivos para desechos orgánicos.</li>
+                <li><strong>Compostaje:</strong> Mezcla los residuos con materiales ricos en carbono (hojas secas, ramas pequeñas) para generar compost.</li>
+                <li><strong>Mantenimiento:</strong> Remueve y controla la humedad del compost para acelerar la descomposición.</li>
+                <li><strong>Aplicación:</strong> Utiliza el compost como fertilizante natural en jardines y cultivos.</li>
+              </ul>
+            </div>
+            <div className="section-image">
+              <div className="image-wrapper">
+                <img src="/images/desechos-organicos.png" alt="Tratamiento de Desechos Orgánicos" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Proceso de Tratamiento de Residuos */}
+        <section className="info-section">
+          <h2>Proceso de Tratamiento Integral</h2>
+          <div className="section-content reverse">
+            <div className="section-image">
+              <div className="image-wrapper">
+                <img src="/images/proceso-tratamiento.png" alt="Proceso de Tratamiento de Residuos" />
+              </div>
+            </div>
+            <div className="section-text">
+              <p>
+                Después de recolectar, los residuos se llevan a plantas donde se realizan:
+              </p>
+              <ul>
+                <li><strong>Clasificación y separación:</strong> Organizan los residuos en orgánicos, reciclables y no reciclables.</li>
+                <li><strong>Reciclaje:</strong> Los materiales aptos se procesan para generar nuevas materias primas.</li>
+                <li><strong>Compostaje:</strong> Los desechos orgánicos se transforman en compost.</li>
+                <li><strong>Disposición final:</strong> Los residuos no procesables se colocan en rellenos sanitarios, bajo estrictas normativas ambientales.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Beneficios del Reciclaje */}
+        <section className="info-section">
+          <h2>Beneficios del Reciclaje</h2>
+          <div className="section-content">
+            <div className="section-text">
+              <p>
+                Reciclar no solo reduce la cantidad de basura, sino que también:
+              </p>
+              <ul>
+                <li>Ahorra energía y recursos naturales.</li>
+                <li>Reduce las emisiones de CO₂.</li>
+                <li>Genera empleo en la industria del reciclaje.</li>
+                <li>Promueve una economía circular.</li>
+              </ul>
+            </div>
+            <div className="section-image">
+              <div className="image-wrapper">
+                <img src="/images/beneficios-reciclaje.png" alt="Beneficios del Reciclaje" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Iniciativas Locales */}
+        <section className="info-section">
+          <h2>Iniciativas Locales y Casos de Éxito</h2>
+          <div className="section-content reverse">
+            <div className="section-image">
+              <div className="image-wrapper">
+                <img src="/images/iniciativas-locales.png" alt="Iniciativas Locales" />
+              </div>
+            </div>
+            <div className="section-text">
+              <p>
+                Diversas comunidades y gobiernos locales han implementado programas innovadores para la separación y reciclaje de residuos. Estos proyectos demuestran cómo la acción conjunta puede transformar ciudades y proteger el medio ambiente.
+              </p>
+              <p>
+                ¡Conoce estos casos de éxito y únete al cambio!
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección de Galería */}
+        <section className="gallery-section">
+          <div className="gallery-item">
+            <div className="image-wrapper">
+              <img src="/images/organicos.jpg" alt="Residuos Orgánicos" />
+            </div>
+            <h3>Residuos Orgánicos</h3>
+            <p>
+              Provenientes de alimentos y restos vegetales, son biodegradables y se pueden compostar.
+            </p>
+          </div>
+          <div className="gallery-item">
+            <div className="image-wrapper">
+              <img src="/images/reciclables.jpg" alt="Residuos Reciclables" />
+            </div>
+            <h3>Residuos Reciclables</h3>
+            <p>
+              Incluyen papel, plástico, vidrio y metal, materiales aptos para su reciclaje.
+            </p>
+          </div>
+          <div className="gallery-item">
+            <div className="image-wrapper">
+              <img src="/images/noreciclables.jpg" alt="Residuos No Reciclables" />
+            </div>
+            <h3>Residuos No Reciclables</h3>
+            <p>
+              Aquellos que por su composición no pueden reciclarse y requieren una disposición especial.
+            </p>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Recicla UMG. Todos los derechos reservados.</p>
       </footer>
-    </div>
+
+      <style jsx>{`
+        /* Reset básico */
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        /* Barra de Navegación Minimalista */
+        .top-nav {
+          background: rgba(255, 255, 255, 0.95);
+          padding: 0.5rem 2rem;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .nav-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .nav-left {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+        .logo {
+          max-height: 40px;
+          object-fit: contain;
+        }
+        .logo-text {
+          font-size: 1rem;
+          font-weight: bold;
+          color: #333;
+        }
+        .nav-right {
+          display: flex;
+          gap: 2rem;
+        }
+        .nav-link {
+          text-decoration: none;
+          color: #333;
+          font-size: 1rem;
+          font-weight: 500;
+          transition: color 0.2s ease;
+        }
+        .nav-link:hover,
+        .nav-link:focus,
+        .nav-link:visited,
+        .nav-link:active {
+          text-decoration: none;
+          color: #0070f3;
+        }
+        /* Sección Hero */
+        .hero {
+          position: relative;
+          height: 70vh;
+          overflow: hidden;
+          text-align: center;
+          color: #fff;
+        }
+        .hero-img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: -2;
+        }
+        .hero-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.4);
+          z-index: -1;
+        }
+        .hero-content {
+          position: relative;
+          z-index: 1;
+          max-width: 700px;
+          padding: 2rem;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        .hero-content h1,
+        .hero-content h2,
+        .hero-content h3 {
+          color: #fff;
+          margin: 0.5rem 0;
+        }
+        .hero-content p {
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          line-height: 1.5;
+          text-align: center;
+        }
+        .hero-button {
+          display: inline-block;
+          padding: 1rem 2rem;
+          background-color: #0070f3;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          text-decoration: none;
+          font-size: 1.2rem;
+          transition: background 0.3s ease;
+          cursor: pointer;
+        }
+        .hero-button:hover {
+          background-color: #005bb5;
+        }
+        /* Main Content */
+        .main-content {
+          padding: 2rem;
+          background: #f9f9f9;
+        }
+        .info-section {
+          text-align: center;
+          margin-bottom: 2rem;
+          padding: 0 1rem;
+        }
+        .info-section h2 {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+          color: limegreen;
+        }
+        .info-section p {
+          font-size: 1.1rem;
+          color: #555;
+          max-width: 800px;
+          margin: 0 auto;
+          line-height: 1.6;
+        }
+        .info-section ul {
+          list-style: disc;
+          margin: 1rem auto;
+          max-width: 800px;
+          text-align: left;
+          padding-left: 1.5rem;
+        }
+        .info-section li {
+          margin-bottom: 0.5rem;
+          font-size: 1.1rem;
+          color: #555;
+        }
+        /* Secciones con contenido dividido */
+        .section-content {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 2rem;
+          margin-top: 1rem;
+          flex-wrap: wrap;
+        }
+        .section-text {
+          flex: 1;
+          min-width: 250px;
+        }
+        .section-image {
+          flex: 1;
+          min-width: 250px;
+          text-align: center;
+        }
+        .image-wrapper {
+          width: 100%;
+          height: 300px; /* Altura fija para mantener consistencia */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 8px;
+          overflow: hidden;
+          /* Sin fondo para que no aparezca color distinto */
+          background: transparent;
+        }
+        .image-wrapper img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+        }
+        .reverse {
+          flex-direction: row-reverse;
+        }
+        /* Galería */
+        .gallery-section {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 1.5rem;
+          margin-top: 2rem;
+        }
+        .gallery-item {
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          flex: 1 1 300px;
+          max-width: 300px;
+          text-align: center;
+          padding: 1rem;
+        }
+        .gallery-item .image-wrapper {
+          height: 200px; /* Altura fija para imágenes de la galería */
+          margin-bottom: 1rem;
+          background: transparent;
+        }
+        .gallery-item h3 {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+          color: limegreen;
+        }
+        .gallery-item p {
+          font-size: 1rem;
+          color: #666;
+          line-height: 1.4;
+        }
+        /* Footer */
+        .footer {
+          text-align: center;
+          padding: 1rem;
+          background: #fff;
+          border-top: 1px solid #ddd;
+          margin-top: 2rem;
+        }
+        .footer p {
+          font-size: 1rem;
+          color: #333;
+        }
+        /* Responsividad */
+        @media (max-width: 768px) {
+          .nav-container {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+          }
+          .nav-left,
+          .nav-right {
+            justify-content: center;
+          }
+          .hero {
+            height: 50vh;
+          }
+          .hero-content {
+            padding: 1rem;
+          }
+          .hero-content h1 {
+            font-size: 2.5rem;
+          }
+          .hero-content h2,
+          .hero-content h3 {
+            font-size: 1.5rem;
+          }
+          .hero-content p {
+            font-size: 1rem;
+          }
+          .section-content {
+            flex-direction: column;
+          }
+          .reverse {
+            flex-direction: column-reverse;
+          }
+          .section-text {
+            text-align: center;
+          }
+          .gallery-section {
+            flex-direction: column;
+            align-items: center;
+          }
+          .gallery-item {
+            max-width: 90%;
+          }
+          .image-wrapper {
+            height: auto;
+          }
+        }
+      `}</style>
+    </>
   );
 }
