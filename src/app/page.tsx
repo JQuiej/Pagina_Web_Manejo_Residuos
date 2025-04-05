@@ -1,32 +1,44 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
+import { useState } from "react";
 
 export default function WelcomePage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   return (
     <>
-      {/* Barra de navegación minimalista con logo a la izquierda */}
+      {/* Barra de navegación con menú responsivo */}
       <header className="top-nav">
         <div className="nav-container">
           <div className="nav-left">
             <img src="/images/logo.png" alt="Logo Recicla UMG" className="logo" />
             <span className="logo-text">Recicla UMG</span>
           </div>
-          <nav className="nav-right">
-            <a href="/" className="nav-link">
-              Inicio
-            </a>
-            <a href="/departamentos" className="nav-link">
-              Estadisticas
-            </a>
-            <a href="/mapa" className="nav-link">Mapa de Residuos</a>
-            <a href="/clasificador" className="nav-link">
-              Clasificador
-            </a>
-            
-          </nav>
+          <div className="nav-right">
+            {/* Enlaces de navegación para pantallas grandes */}
+            <nav className="nav-links">
+              <a href="/" className="nav-link">Inicio</a>
+              <a href="/departamentos" className="nav-link">Estadisticas</a>
+              <a href="/mapa" className="nav-link">Mapa de Residuos</a>
+              <a href="/clasificador" className="nav-link">Clasificador</a>
+            </nav>
+            {/* Botón de menú hamburguesa para pantallas pequeñas */}
+            <button className="hamburger" onClick={toggleMenu}>
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </button>
+          </div>
         </div>
+        {/* Menú desplegable móvil */}
+        {isMenuOpen && (
+          <nav className="mobile-menu">
+            <a href="/" className="nav-link" onClick={toggleMenu}>Inicio</a>
+            <a href="/departamentos" className="nav-link" onClick={toggleMenu}>Estadisticas</a>
+            <a href="/mapa" className="nav-link" onClick={toggleMenu}>Mapa de Residuos</a>
+            <a href="/clasificador" className="nav-link" onClick={toggleMenu}>Clasificador</a>
+          </nav>
+        )}
       </header>
 
       {/* Sección Hero */}
@@ -192,12 +204,12 @@ export default function WelcomePage() {
           margin: 0;
           padding: 0;
           font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-          background-color: #fff; /* Fondo blanco */
-          color: #000; /* Texto negro por defecto */
+          background-color: #fff;
+          color: #000;
         }
-        /* Barra de Navegación Minimalista */
+        /* Barra de Navegación */
         .top-nav {
-          background: #fff; /* Fondo blanco */
+          background: #fff;
           padding: 0.5rem 2rem;
           position: sticky;
           top: 0;
@@ -221,15 +233,19 @@ export default function WelcomePage() {
         .logo-text {
           font-size: 1rem;
           font-weight: bold;
-          color: #000; /* Texto negro */
+          color: #000;
         }
         .nav-right {
           display: flex;
-          gap: 1rem; /* Espacio entre los botones del nav */
+          align-items: center;
+          gap: 1rem;
         }
-        /* Enlaces como botones outline en negro */
+        /* Enlaces de navegación */
+        .nav-links {
+          display: flex;
+          gap: 1rem;
+        }
         .nav-link {
-          display: inline-block;
           padding: 0.5rem 1.2rem;
           background-color: transparent;
           color: #000;
@@ -244,9 +260,35 @@ export default function WelcomePage() {
         .nav-link:hover,
         .nav-link:focus {
           background-color: #000;
-          color: #fff; /* Al invertirlo, texto blanco para contraste */
+          color: #fff;
         }
-
+        /* Menú hamburguesa */
+        .hamburger {
+          display: none;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 24px;
+          height: 24px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+        }
+        .hamburger .bar {
+          width: 100%;
+          height: 3px;
+          background-color: #000;
+          border-radius: 2px;
+        }
+        /* Menú móvil */
+        .mobile-menu {
+          display: none;
+          flex-direction: column;
+          gap: 0.5rem;
+          padding: 0.5rem 2rem;
+          background: #fff;
+          border-top: 1px solid #ddd;
+        }
         /* Sección Hero */
         .hero {
           position: relative;
@@ -287,7 +329,7 @@ export default function WelcomePage() {
         .hero-content h2,
         .hero-content h3 {
           margin: 0.5rem 0;
-          color: #fff; /* Texto sobre la imagen oscurecida */
+          color: #fff;
         }
         .hero-content p {
           font-size: 1.2rem;
@@ -295,12 +337,10 @@ export default function WelcomePage() {
           line-height: 1.5;
           color: #fff;
         }
-        /* Botón principal outline en negro */
         .hero-button {
-          display: inline-block;
           padding: 1rem 2rem;
           border: 1px solid #000;
-          background-color: #fff; /* O transparente, si quieres */
+          background-color: #fff;
           color: #000;
           border-radius: 6px;
           text-decoration: none;
@@ -312,11 +352,10 @@ export default function WelcomePage() {
           background-color: #000;
           color: #fff;
         }
-
-        /* Main Content */
+        /* Contenido Principal */
         .main-content {
           padding: 2rem;
-          background: #fff; /* Fondo blanco */
+          background: #fff;
         }
         .info-section {
           text-align: center;
@@ -347,7 +386,6 @@ export default function WelcomePage() {
           margin-bottom: 0.5rem;
           font-size: 1.1rem;
         }
-        /* Secciones con contenido dividido */
         .section-content {
           display: flex;
           align-items: center;
@@ -384,7 +422,6 @@ export default function WelcomePage() {
         .reverse {
           flex-direction: row-reverse;
         }
-
         /* Galería */
         .gallery-section {
           display: flex;
@@ -417,7 +454,6 @@ export default function WelcomePage() {
           color: #666;
           line-height: 1.4;
         }
-
         /* Footer */
         .footer {
           text-align: center;
@@ -430,17 +466,21 @@ export default function WelcomePage() {
           font-size: 1rem;
           color: #333;
         }
-
         /* Responsividad */
         @media (max-width: 768px) {
           .nav-container {
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
+            flex-direction: row;
+            justify-content: space-between;
           }
-          .nav-left,
-          .nav-right {
-            justify-content: center;
+          .nav-links {
+            display: none;
+          }
+          .hamburger {
+            display: flex;
+          }
+          .mobile-menu {
+            display: flex;
+            flex-direction: column;
           }
           .hero {
             height: 50vh;

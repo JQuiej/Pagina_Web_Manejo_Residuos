@@ -1,7 +1,5 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
+import { useState } from "react";
 
 type DepartamentoInfo = {
   nombre: string;
@@ -10,8 +8,11 @@ type DepartamentoInfo = {
 };
 
 export default function DepartamentosPage() {
-  // Listado completo de los 22 departamentos con datos estimados (ejemplo).
-  // Ajusta los valores y comentarios según tus fuentes.
+  // Estado para el menú móvil
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Datos de ejemplo
   const departamentosData: DepartamentoInfo[] = [
     { nombre: "Guatemala",        desechosTon: 1200, comentarios: "Zona metropolitana con alta densidad poblacional" },
     { nombre: "El Progreso",      desechosTon: 80,   comentarios: "Generación menor por área semiárida" },
@@ -37,36 +38,55 @@ export default function DepartamentosPage() {
     { nombre: "Jutiapa",          desechosTon: 135,  comentarios: "Crecimiento poblacional moderado" },
   ];
 
-  // Función para determinar el color de fondo por rangos de toneladas
-  // (ejemplo de mapeo de color basado en la cantidad de desechos).
+  // Determinar color de fila según rango de toneladas
   const getRowColor = (ton: number) => {
-    if (ton > 600)  return "#f8d7da"; // Rango muy alto -> rojizo claro
-    if (ton > 300)  return "#fff3cd"; // Rango medio-alto -> amarillo claro
-    if (ton > 150)  return "#d1ecf1"; // Rango medio -> celeste claro
-    return "#d4edda";                // Rango bajo -> verde claro
+    if (ton > 600) return "#f8d7da"; // Rango muy alto (rojizo claro)
+    if (ton > 300) return "#fff3cd"; // Rango medio-alto (amarillo claro)
+    if (ton > 150) return "#d1ecf1"; // Rango medio (celeste claro)
+    return "#d4edda";                // Rango bajo (verde claro)
   };
 
   return (
     <>
+      {/* Barra de navegación con mismo diseño que tu primer ejemplo */}
       <header className="top-nav">
         <div className="nav-container">
           <div className="nav-left">
             <img src="/images/logo.png" alt="Logo Recicla UMG" className="logo" />
             <span className="logo-text">Recicla UMG</span>
           </div>
-          <nav className="nav-right">
-            <a href="/" className="nav-link">Inicio</a>
-            <a href="/departamentos" className="nav-link">Estadísticas</a>
-            <a href="/mapa" className="nav-link">Mapa de Residuos</a>
-            <a href="/clasificador" className="nav-link">Clasificador</a>
-          </nav>
+          <div className="nav-right">
+            {/* Enlaces visibles en escritorio */}
+            <nav className="nav-links">
+              <a href="/" className="nav-link">Inicio</a>
+              <a href="/departamentos" className="nav-link">Estadísticas</a>
+              <a href="/mapa" className="nav-link">Mapa de Residuos</a>
+              <a href="/clasificador" className="nav-link">Clasificador</a>
+            </nav>
+            {/* Botón hamburguesa para móvil */}
+            <button className="hamburger" onClick={toggleMenu}>
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </button>
+          </div>
         </div>
+        {/* Menú desplegable en móvil */}
+        {isMenuOpen && (
+          <nav className="mobile-menu">
+            <a href="/" className="nav-link" onClick={toggleMenu}>Inicio</a>
+            <a href="/departamentos" className="nav-link" onClick={toggleMenu}>Estadísticas</a>
+            <a href="/mapa" className="nav-link" onClick={toggleMenu}>Mapa de Residuos</a>
+            <a href="/clasificador" className="nav-link" onClick={toggleMenu}>Clasificador</a>
+          </nav>
+        )}
       </header>
 
+      {/* Contenido principal */}
       <main className="content">
         <h1>Departamentos con Mayor Generación de Desechos</h1>
         <p>
-          A continuación, se muestra un estimado de los 22 departamentos de Guatemala con mayor producción de desechos. 
+          A continuación, se muestra un estimado de los 22 departamentos de Guatemala con mayor producción de desechos.
           Estos datos tienen fines ilustrativos y pueden variar según estudios oficiales.
         </p>
 
@@ -97,7 +117,7 @@ export default function DepartamentosPage() {
       </footer>
 
       <style jsx>{`
-        /* Encabezado / Barra de navegación */
+        /* ---------- NAV: Mismo estilo que en tu primer ejemplo ---------- */
         .top-nav {
           background: #fff;
           padding: 0.5rem 2rem;
@@ -118,39 +138,79 @@ export default function DepartamentosPage() {
         }
         .logo {
           max-height: 40px;
+          object-fit: contain;
         }
         .logo-text {
           font-size: 1rem;
           font-weight: bold;
-          color: #333;
+          color: #000;
         }
         .nav-right {
           display: flex;
           gap: 1rem;
+          align-items: center;
+        }
+        /* Enlaces con outline negro */
+        .nav-links {
+          display: flex;
+          gap: 1rem;
         }
         .nav-link {
+          display: inline-block;
           padding: 0.5rem 1.2rem;
-          color: #333;
-          border: 1px solid #333;
-          border-radius: 4px;
+          background-color: transparent;
+          color: #000;
+          border: 1px solid #000;
+          border-radius: 6px;
           text-decoration: none;
+          font-size: 1rem;
+          font-weight: 500;
           transition: background-color 0.2s ease, color 0.2s ease;
+          cursor: pointer;
         }
-        .nav-link:hover {
-          background-color: #333;
+        .nav-link:hover,
+        .nav-link:focus {
+          background-color: #000;
           color: #fff;
         }
+        /* Botón hamburguesa (oculto en escritorio) */
+        .hamburger {
+          display: none;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 24px;
+          height: 24px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+        }
+        .hamburger .bar {
+          width: 100%;
+          height: 3px;
+          background-color: #000;
+          border-radius: 2px;
+        }
+        /* Menú móvil (inicialmente oculto) */
+        .mobile-menu {
+          display: none;
+          flex-direction: column;
+          gap: 0.5rem;
+          padding: 0.5rem 2rem;
+          background: #fff;
+          border-top: 1px solid #ddd;
+        }
 
-        /* Contenido principal */
+        /* ---------- CONTENIDO PRINCIPAL ---------- */
         .content {
-          max-width: 900px; /* un poquito más ancho para la tabla */
+          max-width: 900px;
           margin: 2rem auto;
           padding: 1rem;
           background: #f9f9f9;
           border-radius: 8px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          font-family: Arial, sans-serif;
           text-align: center;
+          font-family: Arial, sans-serif;
         }
         h1 {
           margin-bottom: 1rem;
@@ -160,10 +220,9 @@ export default function DepartamentosPage() {
           margin-bottom: 1.5rem;
           color: #555;
         }
-
         /* Tabla */
         .table-container {
-          overflow-x: auto; /* Para scroll horizontal en pantallas pequeñas */
+          overflow-x: auto;
         }
         table {
           width: 100%;
@@ -179,12 +238,8 @@ export default function DepartamentosPage() {
           background-color: #efefef;
           color: #333;
         }
-        tbody tr:nth-child(even) {
-          /* quitamos color alterno para no chocar con el mapeo de color
-             pero si gustas mantenerlo, cambia la lógica */
-        }
 
-        /* Footer */
+        /* ---------- FOOTER ---------- */
         .footer {
           text-align: center;
           padding: 1rem;
@@ -196,10 +251,23 @@ export default function DepartamentosPage() {
           color: #333;
         }
 
+        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 768px) {
+          /* Ocultamos nav-links y mostramos hamburguesa */
+          .nav-links {
+            display: none;
+          }
+          .hamburger {
+            display: flex;
+          }
+          /* Mostramos el menú móvil cuando isMenuOpen es true */
+          .mobile-menu {
+            display: flex;
+          }
+          /* Ajustes de layout si quieres mantener logo + hamburguesa en una sola fila */
           .nav-container {
-            flex-direction: column;
-            gap: 1rem;
+            flex-direction: row;
+            justify-content: space-between;
           }
           .content {
             margin: 1rem;
